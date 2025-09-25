@@ -24,6 +24,7 @@ python -m torch.distributed.run \
     --nproc_per_node=$GPUS_PER_NODE \
     --master_port=$MASTER_PORT \
     $(dirname "$0")/test.py \
+    --launcher pytorch \
     $CFG \
     $CKPT \
     ${@:4} \

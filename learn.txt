@@ -1,0 +1,34 @@
+
+
+1.环境复用了diffpolo
+
+2.evaluation
+./tools/uniad_dist_eval.sh ./projects/configs/stage1_track_map/base_track_map.py ./ckpts/uniad_base_track_map.pth 8
+
+
+3.train
+
+./tools/uniad_dist_train.sh ./projects/configs/stage1_track_map/base_track_map.py 8
+./tools/uniad_dist_train.sh ./projects/configs/stage2_e2e/base_e2e.py 8
+
+
+4.eval
+
+./tools/uniad_dist_eval.sh ./projects/configs/stage2_e2e/base_e2e.py  ./ckpts/uniad_base_e2e.pth 8
+
+
+
+
+5.visualize
+# please refer to  ./tools/uniad_vis_result.sh
+python ./tools/analysis_tools/visualize/run.py \
+    --predroot /PATH/TO/YOUR/RESULTS.pkl \
+    --out_folder /PATH/TO/YOUR/OUTPUT \
+    --demo_video test_demo.avi \
+    --project_to_cam True
+
+
+6.问题
+mmcv文件夹的名字和mmcv库发生冲突，导致运行时报错
+mmcv测试：python -c "from mmcv.ops import nms_match; print(nms_match)"
+原代码发现没有调通多进程分布式运算，我进行了相应修改

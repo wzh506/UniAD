@@ -360,9 +360,9 @@ model = dict(
 )
 dataset_type = "NuScenesE2EDataset"
 data_root = "data/nuscenes/"
-info_root = "data/infos/"
+info_root = "data/uniad/"
 file_client_args = dict(backend="disk")
-ann_file_train=info_root + f"nuscenes_infos_temporal_train.pkl"
+ann_file_train=info_root + f"nuscenes_infos_temporal_val.pkl"
 ann_file_val=info_root + f"nuscenes_infos_temporal_val.pkl"
 ann_file_test=info_root + f"nuscenes_infos_temporal_val.pkl"
 
@@ -482,7 +482,7 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=8,
+    workers_per_gpu=1, #原来是8,我的80G都运行不了，他的显卡多大？？？
     train=dict(
         type=dataset_type,
         file_client_args=file_client_args,

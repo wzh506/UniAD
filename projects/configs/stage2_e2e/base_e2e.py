@@ -416,7 +416,7 @@ model = dict(
         group_id_list=group_id_list,
         num_anchor=6,
         use_nonlinear_optimizer=use_nonlinear_optimizer,
-        anchor_info_path='data/others/motion_anchor_infos_mode6.pkl',
+        anchor_info_path='data/uniad/motion_anchor_infos_mode6.pkl',
         transformerlayers=dict(
             type='MotionTransformerDecoder',
             pc_range=point_cloud_range,
@@ -474,9 +474,9 @@ model = dict(
 )
 dataset_type = "NuScenesE2EDataset"
 data_root = "data/nuscenes/"
-info_root = "data/infos/"
+info_root = "data/uniad/"
 file_client_args = dict(backend="disk")
-ann_file_train=info_root + f"nuscenes_infos_temporal_train.pkl"
+ann_file_train=info_root + f"nuscenes_infos_temporal_val.pkl" #load的时间太长了，我改为val，速度会快不少吧
 ann_file_val=info_root + f"nuscenes_infos_temporal_val.pkl"
 ann_file_test=info_root + f"nuscenes_infos_temporal_val.pkl"
 
@@ -596,7 +596,7 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=8,
+    workers_per_gpu=1,
     train=dict(
         type=dataset_type,
         file_client_args=file_client_args,

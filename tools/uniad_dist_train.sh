@@ -22,6 +22,10 @@ if [ ! -d ${WORK_DIR}logs ]; then
 fi
 
 PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
+
+export PYTHONPATH=/home/lucian.wang/github/UniAD:$PYTHONPATH
+
+# PYTHONPATH="/home/lucian.wang/.conda/envs/diffpolo/lib/python3.9/site-packages":$PYTHONPATH
 python -m torch.distributed.run \
     --nproc_per_node=${GPUS_PER_NODE} \
     --master_addr=${MASTER_ADDR} \
@@ -33,4 +37,5 @@ python -m torch.distributed.run \
     ${@:3} \
     --deterministic \
     --work-dir ${WORK_DIR} \
+    --launcher pytorch \
     2>&1 | tee ${WORK_DIR}logs/train.$T
