@@ -596,7 +596,7 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=1,
+    workers_per_gpu=8,
     train=dict(
         type=dataset_type,
         file_client_args=file_client_args,
@@ -639,7 +639,7 @@ data = dict(
         use_nonlinear_optimizer=use_nonlinear_optimizer,
         classes=class_names,
         modality=input_modality,
-        samples_per_gpu=1,
+        samples_per_gpu=2,
         eval_mod=['det', 'map', 'track','motion'],
         
 

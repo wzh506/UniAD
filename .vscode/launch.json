@@ -21,7 +21,30 @@
                 "PYTHONPATH": "${workspaceFolder}/..:${env:PYTHONPATH}"
             },
             "console": "integratedTerminal"
-        }
+        },
+   {
+      "name": "UniAD Eval (single GPU)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/test.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}",
+        "CUDA_VISIBLE_DEVICES": "0",
+        "OMP_NUM_THREADS": "4"
+      },
+      "args": [
+        "projects/configs/stage2_e2e/base_e2e.py",
+        "ckpts/uniad_base_e2e.pth",
+        "--eval", "bbox",
+        "--show-dir", "${workspaceFolder}/projects/work_dirs/single_gpu_eval",
+        "--launcher", "none",
+        // "--out",
+        // "",
+      ]
+    }
     ]
 }
 

@@ -106,8 +106,9 @@ class PlanningMetric(Metric):
                 torch.logical_and(xi >= 0, xi < self.bev_dimension[1]),
             )
             m1 = torch.logical_and(m1, torch.logical_not(gt_box_coll))
-
-            ti = torch.arange(n_future)
+            # breakpoint()
+            ti = torch.arange(n_future).to(obj_coll_sum.device) 
+            
             obj_coll_sum[ti[m1]] += segmentation[i, ti[m1], yi[m1], xi[m1]].long()
 
             m2 = torch.logical_not(gt_box_coll)

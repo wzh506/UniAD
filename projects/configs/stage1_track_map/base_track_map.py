@@ -11,6 +11,7 @@ _base_ = ["../_base_/datasets/nus-3d.py",
 
 # Unfreeze neck and BN, the from-scratch results of stage1 could be reproduced
 plugin = True
+num_workers = 8
 plugin_dir = "projects/mmdet3d_plugin/"
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
@@ -482,7 +483,7 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=1, #原来是8,我的80G都运行不了，他的显卡多大？？？
+    workers_per_gpu=num_workers, #原来是8,我的80G都运行不了，他的显卡多大？？？
     train=dict(
         type=dataset_type,
         file_client_args=file_client_args,
