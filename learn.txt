@@ -33,3 +33,4 @@ mmcv文件夹的名字和mmcv库发生冲突，导致运行时报错
 mmcv测试：python -c "from mmcv.ops import nms_match; print(nms_match)"
 原代码发现没有调通多进程分布式运算，我进行了相应修改
 现在代码可以运行，不过发现v2.0的和现有ckpt不是很合适
+目前最新版本的可视化有严重问题，请使用UniAD1.0版本
